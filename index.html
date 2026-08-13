@@ -240,7 +240,7 @@
 <body>
 
     <div class="player-card">
-        <!-- Ruta codificada con %20 para evitar problemas con los espacios -->
+        <!-- Portada -->
         <div class="album-art-container">
             <img class="album-art" src="Anyuri%20nanana.jpg" alt="">
         </div>
@@ -261,14 +261,14 @@
             </div>
             <div class="time-stamps">
                 <span id="current-time">0:00</span>
-                <span id="duration">2:38</span>
+                <span id="duration">0:00</span>
             </div>
 
             <div class="playback-controls">
                 <button class="control-btn"><i class="fas fa-random"></i></button>
                 <button class="control-btn"><i class="fas fa-step-backward"></i></button>
                 
-                <!-- Botón Play funcional -->
+                <!-- Botón Play principal -->
                 <button class="play-btn" id="play-btn">
                     <i class="fas fa-play" id="play-icon" style="margin-left: 2px;"></i>
                 </button>
@@ -333,8 +333,8 @@
         </ul>
     </div>
 
-    <!-- Archivo de Audio MP3 -->
-    <audio id="audio" src="Na Na Na.mp3"></audio>
+    <!-- Elemento de audio con el nombre exacto del archivo subido a GitHub -->
+    <audio id="audio" src="Na%20Na%20Na.mp3" preload="metadata"></audio>
 
     <script>
         const audio = document.getElementById('audio');
@@ -345,7 +345,21 @@
         const currentTimeEl = document.getElementById('current-time');
         const durationEl = document.getElementById('duration');
 
-        // Play / Pause
+        // Función para dar formato mm:ss
+        function formatTime(seconds) {
+            const min = Math.floor(seconds / 60);
+            const sec = Math.floor(seconds % 60);
+            return `${min}:${sec < 10 ? '0' : ''}${sec}`;
+        }
+
+        // Cargar duración real cuando el audio esté listo
+        audio.addEventListener('loadedmetadata', () => {
+            if (audio.duration) {
+                durationEl.innerText = formatTime(audio.duration);
+            }
+        });
+
+        // Alternar Play / Pause
         playBtn.addEventListener('click', () => {
             if (audio.paused) {
                 audio.play();
@@ -355,32 +369,36 @@
             } else {
                 audio.pause();
                 playIcon.classList.remove('fa-pause');
+                playIcon.classList.add('fa-play');
                 playIcon.style.marginLeft = "2px";
             }
         });
 
-        // Actualizar barra de progreso y tiempo
-        audio.addEventListener('timeupdate', (e) => {
-            const { duration, currentTime } = e.srcElement;
-            if (duration) {
-                const progressPercent = (currentTime / duration) * 100;
+        // Actualizar barra de progreso y tiempo en reproducción
+        audio.addEventListener('timeupdate', () => {
+            if (audio.duration) {
+                const progressPercent = (audio.currentTime / audio.duration) * 100;
                 progressBar.style.width = `${progressPercent}%`;
-                
-                // Formato de tiempo
-                const currentMinutes = Math.floor(currentTime / 60);
-                const currentSeconds = Math.floor(currentTime % 60);
-                currentTimeEl.innerText = `${currentMinutes}:${currentSeconds < 10 ? '0' : ''}${currentSeconds}`;
+                currentTimeEl.innerText = formatTime(audio.currentTime);
             }
         });
 
-        // Adelantar o atrasar al hacer clic en la barra
+        // Permitir buscar/saltar tiempo al hacer clic en la barra
         progressContainer.addEventListener('click', (e) => {
             const width = progressContainer.clientWidth;
             const clickX = e.offsetX;
-            const duration = audio.duration;
-            if (duration) {
-                audio.currentTime = (clickX / width) * duration;
+            if (audio.duration) {
+                audio.currentTime = (clickX / width) * audio.duration;
             }
+        });
+
+        // Resetear icono cuando la canción termine
+        audio.addEventListener('ended', () => {
+            playIcon.classList.remove('fa-pause');
+            playIcon.classList.add('fa-play');
+            playIcon.style.marginLeft = "2px";
+            progressBar.style.width = '0%';
+            currentTimeEl.innerText = '0:00';
         });
     </script>
 </body>
