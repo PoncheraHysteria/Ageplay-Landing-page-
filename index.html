@@ -17,35 +17,36 @@
             background-color: #0b0b0e;
             color: #ffffff;
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
             min-height: 100vh;
-            padding: 20px;
+            position: relative;
         }
 
+        /* Contenedor flotante en la esquina inferior derecha */
         .player-card {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
             background-color: #4a0000;
             width: 100%;
-            max-width: 360px;
-            border-radius: 20px;
-            padding: 20px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7);
-            border: 1px solid rgba(255, 255, 255, 0.05);
+            max-width: 290px; /* Tamaño más pequeño y compacto */
+            border-radius: 16px;
+            padding: 15px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.8);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            z-index: 9999;
         }
 
         .album-art-container {
             width: 100%;
             aspect-ratio: 1 / 1;
-            border-radius: 12px;
+            border-radius: 10px;
             overflow: hidden;
-            margin-bottom: 20px;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+            margin-bottom: 12px;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.5);
             background-color: #2a0000;
             display: flex;
             justify-content: center;
             align-items: center;
-            position: relative;
         }
 
         .album-art {
@@ -58,7 +59,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 15px;
+            margin-bottom: 10px;
         }
 
         .track-info {
@@ -66,7 +67,7 @@
         }
 
         .track-title {
-            font-size: 24px;
+            font-size: 20px;
             font-weight: 800;
             color: #ffffff;
             margin-bottom: 2px;
@@ -74,7 +75,7 @@
         }
 
         .artist-name {
-            font-size: 15px;
+            font-size: 13px;
             color: rgba(255, 255, 255, 0.7);
             font-weight: 500;
         }
@@ -83,15 +84,15 @@
             background: none;
             border: none;
             color: rgba(255, 255, 255, 0.8);
-            font-size: 24px;
+            font-size: 20px;
             cursor: pointer;
-            padding: 5px;
+            padding: 4px;
         }
 
         /* Player Controls */
         .controls-container {
-            margin-top: 15px;
-            margin-bottom: 20px;
+            margin-top: 10px;
+            margin-bottom: 15px;
         }
 
         .progress-bar-container {
@@ -99,7 +100,7 @@
             height: 4px;
             background-color: rgba(255, 255, 255, 0.2);
             border-radius: 2px;
-            margin-bottom: 8px;
+            margin-bottom: 6px;
             position: relative;
             cursor: pointer;
         }
@@ -115,24 +116,24 @@
         .time-stamps {
             display: flex;
             justify-content: space-between;
-            font-size: 11px;
+            font-size: 10px;
             color: rgba(255, 255, 255, 0.6);
             font-weight: 600;
-            margin-bottom: 15px;
+            margin-bottom: 12px;
         }
 
         .playback-controls {
             display: flex;
             justify-content: center;
             align-items: center;
-            gap: 25px;
+            gap: 18px;
         }
 
         .control-btn {
             background: none;
             border: none;
             color: #ffffff;
-            font-size: 18px;
+            font-size: 15px;
             cursor: pointer;
             opacity: 0.8;
             transition: opacity 0.2s;
@@ -143,17 +144,17 @@
         }
 
         .play-btn {
-            width: 50px;
-            height: 50px;
+            width: 42px;
+            height: 42px;
             border-radius: 50%;
             background-color: #ffffff;
             color: #4a0000;
             display: flex;
             justify-content: center;
             align-items: center;
-            font-size: 20px;
+            font-size: 16px;
             cursor: pointer;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
             transition: transform 0.1s ease;
         }
 
@@ -166,9 +167,9 @@
             display: flex;
             align-items: center;
             text-align: center;
-            margin: 20px 0 15px 0;
+            margin: 15px 0 10px 0;
             color: rgba(255, 255, 255, 0.6);
-            font-size: 12px;
+            font-size: 11px;
             font-weight: 600;
             letter-spacing: 0.5px;
         }
@@ -192,24 +193,24 @@
             list-style: none;
             display: flex;
             flex-direction: column;
-            gap: 12px;
+            gap: 10px;
         }
 
         .queue-item {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            font-size: 14px;
+            font-size: 12px;
         }
 
         .item-info {
             display: flex;
             align-items: center;
-            gap: 6px;
+            gap: 5px;
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
-            max-width: 270px;
+            max-width: 210px;
         }
 
         .item-title {
@@ -225,13 +226,13 @@
         .item-artist {
             color: rgba(255, 255, 255, 0.7);
             font-weight: 500;
-            font-size: 13px;
+            font-size: 11px;
             text-transform: uppercase;
         }
 
         .item-duration {
             color: rgba(255, 255, 255, 0.6);
-            font-size: 13px;
+            font-size: 11px;
             font-weight: 500;
         }
     </style>
@@ -239,9 +240,9 @@
 <body>
 
     <div class="player-card">
-        <!-- Nueva Portada de Anyuri desde ImgBB -->
+        <!-- Imagen local subida a GitHub -->
         <div class="album-art-container">
-            <img class="album-art" src="https://i.ibb.co/ymPJs2bh/Anyuri-nanana.jpg" alt="Na Na Na - Anyuri">
+            <img class="album-art" src="portada.jpg" alt="Na Na Na - Anyuri" onerror="this.src='https://via.placeholder.com/300/4a0000/FFFFFF?text=ANYURI+NA+NA+NA'">
         </div>
 
         <!-- Detalles de la canción -->
@@ -269,7 +270,7 @@
                 
                 <!-- Botón Play funcional -->
                 <button class="play-btn" id="play-btn">
-                    <i class="fas fa-play" id="play-icon" style="margin-left: 3px;"></i>
+                    <i class="fas fa-play" id="play-icon" style="margin-left: 2px;"></i>
                 </button>
                 
                 <button class="control-btn"><i class="fas fa-step-forward"></i></button>
@@ -301,7 +302,7 @@
                 <div class="item-info">
                     <span class="item-title">Enamorame</span>
                     <span class="item-dot">•</span>
-                    <span class="item-artist">El Kid, Rasta Lloyd</span>
+                    <span class="item-artist">EL KID, RASTA LLOYD</span>
                 </div>
                 <span class="item-duration">3:53</span>
             </li>
@@ -309,7 +310,7 @@
                 <div class="item-info">
                     <span class="item-title">Mi Despecho</span>
                     <span class="item-dot">•</span>
-                    <span class="item-artist">Yemil</span>
+                    <span class="item-artist">YEMIL</span>
                 </div>
                 <span class="item-duration">3:30</span>
             </li>
@@ -317,7 +318,7 @@
                 <div class="item-info">
                     <span class="item-title">Tu Chacal</span>
                     <span class="item-dot">•</span>
-                    <span class="item-artist">SMILE BEATS, Valentino GRM</span>
+                    <span class="item-artist">SMILE BEATS, VALENTINO GRM</span>
                 </div>
                 <span class="item-duration">2:52</span>
             </li>
@@ -325,7 +326,7 @@
                 <div class="item-info">
                     <span class="item-title">Tu Man</span>
                     <span class="item-dot">•</span>
-                    <span class="item-artist">Josuan, Valentino GRM</span>
+                    <span class="item-artist">JOSUAN, VALENTINO GRM</span>
                 </div>
                 <span class="item-duration">4:00</span>
             </li>
@@ -355,7 +356,7 @@
                 audio.pause();
                 playIcon.classList.remove('fa-pause');
                 playIcon.classList.add('fa-play');
-                playIcon.style.marginLeft = "3px";
+                playIcon.style.marginLeft = "2px";
             }
         });
 
