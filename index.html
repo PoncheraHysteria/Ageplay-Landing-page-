@@ -240,9 +240,9 @@
 <body>
 
     <div class="player-card">
-        <!-- Nombre de la foto tal como aparece en tu repositorio de GitHub -->
+        <!-- Ruta codificada con %20 para evitar problemas con los espacios -->
         <div class="album-art-container">
-            <img class="album-art" src="Anyuri nanana.jpg" alt="Na Na Na - Anyuri">
+            <img class="album-art" src="Anyuri%20nanana.jpg" alt="">
         </div>
 
         <!-- Detalles de la canción -->
@@ -355,7 +355,6 @@
             } else {
                 audio.pause();
                 playIcon.classList.remove('fa-pause');
-                playIcon.classList.add('fa-play');
                 playIcon.style.marginLeft = "2px";
             }
         });
