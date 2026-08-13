@@ -3,34 +3,385 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>wanna | ageplay.online</title>
+    <title>Na Na Na - Anyuri</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            user-select: none;
+        }
+
         body {
-            background-color: #0f0f13;
+            background-color: #0b0b0e;
             color: #ffffff;
-            font-family: Arial, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh;
-            margin: 0;
+            min-height: 100vh;
+            padding: 20px;
         }
-        .card {
-            background: #1a1a24;
-            padding: 30px;
+
+        .player-card {
+            background-color: #4a0000;
+            width: 100%;
+            max-width: 360px;
+            border-radius: 20px;
+            padding: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .album-art-container {
+            width: 100%;
+            aspect-ratio: 1 / 1;
             border-radius: 12px;
-            text-align: center;
-            border: 1px solid #2a2a3a;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+            overflow: hidden;
+            margin-bottom: 20px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+            background-color: #2a0000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
         }
-        h1 { color: #5865f2; margin-bottom: 10px; }
-        p { color: #aaa; }
+
+        .album-art {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .track-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .track-info {
+            flex-grow: 1;
+        }
+
+        .track-title {
+            font-size: 24px;
+            font-weight: 800;
+            color: #ffffff;
+            margin-bottom: 2px;
+            letter-spacing: -0.5px;
+        }
+
+        .artist-name {
+            font-size: 15px;
+            color: rgba(255, 255, 255, 0.7);
+            font-weight: 500;
+        }
+
+        .add-btn {
+            background: none;
+            border: none;
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 24px;
+            cursor: pointer;
+            padding: 5px;
+        }
+
+        /* Player Controls */
+        .controls-container {
+            margin-top: 15px;
+            margin-bottom: 20px;
+        }
+
+        .progress-bar-container {
+            width: 100%;
+            height: 4px;
+            background-color: rgba(255, 255, 255, 0.2);
+            border-radius: 2px;
+            margin-bottom: 8px;
+            position: relative;
+            cursor: pointer;
+        }
+
+        .progress-bar {
+            width: 0%;
+            height: 100%;
+            background-color: #ffffff;
+            border-radius: 2px;
+            transition: width 0.1s linear;
+        }
+
+        .time-stamps {
+            display: flex;
+            justify-content: space-between;
+            font-size: 11px;
+            color: rgba(255, 255, 255, 0.6);
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        .playback-controls {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 25px;
+        }
+
+        .control-btn {
+            background: none;
+            border: none;
+            color: #ffffff;
+            font-size: 18px;
+            cursor: pointer;
+            opacity: 0.8;
+            transition: opacity 0.2s;
+        }
+
+        .control-btn:hover {
+            opacity: 1;
+        }
+
+        .play-btn {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: #ffffff;
+            color: #4a0000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 20px;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+            transition: transform 0.1s ease;
+        }
+
+        .play-btn:active {
+            transform: scale(0.95);
+        }
+
+        /* Queue Section */
+        .queue-divider {
+            display: flex;
+            align-items: center;
+            text-align: center;
+            margin: 20px 0 15px 0;
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+
+        .queue-divider::before,
+        .queue-divider::after {
+            content: '';
+            flex: 1;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+        }
+
+        .queue-divider:not(:empty)::before {
+            margin-right: .75em;
+        }
+
+        .queue-divider:not(:empty)::after {
+            margin-left: .75em;
+        }
+
+        .queue-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .queue-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 14px;
+        }
+
+        .item-info {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            max-width: 270px;
+        }
+
+        .item-title {
+            font-weight: 700;
+            color: #ffffff;
+        }
+
+        .item-dot {
+            color: rgba(255, 255, 255, 0.5);
+            font-weight: bold;
+        }
+
+        .item-artist {
+            color: rgba(255, 255, 255, 0.7);
+            font-weight: 500;
+            font-size: 13px;
+            text-transform: uppercase;
+        }
+
+        .item-duration {
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 13px;
+            font-weight: 500;
+        }
     </style>
 </head>
 <body>
-    <div class="card">
-        <h1>wanna</h1>
-        <p>Bienvenido a mi sitio web personal.</p>
+
+    <div class="player-card">
+        <!-- Portada Anyuri -->
+        <div class="album-art-container">
+            <img class="album-art" src="https://i.scdn.co/image/ab67616d0000b273e34b1e56b820a1670dd2561f" alt="Na Na Na - Anyuri" onerror="this.src='https://via.placeholder.com/300/4a0000/FFFFFF?text=ANYURI+NA+NA+NA'">
+        </div>
+
+        <!-- Detalles de la canción -->
+        <div class="track-header">
+            <div class="track-info">
+                <div class="track-title">Na Na Na</div>
+                <div class="artist-name">Anyuri</div>
+            </div>
+            <button class="add-btn"><i class="far fa-plus-square"></i></button>
+        </div>
+
+        <!-- Controles del reproductor -->
+        <div class="controls-container">
+            <div class="progress-bar-container" id="progress-container">
+                <div class="progress-bar" id="progress-bar"></div>
+            </div>
+            <div class="time-stamps">
+                <span id="current-time">0:00</span>
+                <span id="duration">2:38</span>
+            </div>
+
+            <div class="playback-controls">
+                <button class="control-btn"><i class="fas fa-random"></i></button>
+                <button class="control-btn"><i class="fas fa-step-backward"></i></button>
+                
+                <!-- Botón Play funcional -->
+                <button class="play-btn" id="play-btn">
+                    <i class="fas fa-play" id="play-icon" style="margin-left: 3px;"></i>
+                </button>
+                
+                <button class="control-btn"><i class="fas fa-step-forward"></i></button>
+                <button class="control-btn"><i class="fas fa-redo"></i></button>
+            </div>
+        </div>
+
+        <!-- Lista de cola -->
+        <div class="queue-divider">Queue</div>
+
+        <ul class="queue-list">
+            <li class="queue-item">
+                <div class="item-info">
+                    <span class="item-title">Se Descargo el Amor</span>
+                    <span class="item-dot">•</span>
+                    <span class="item-artist">BCA</span>
+                </div>
+                <span class="item-duration">3:13</span>
+            </li>
+            <li class="queue-item">
+                <div class="item-info">
+                    <span class="item-title">San José</span>
+                    <span class="item-dot">•</span>
+                    <span class="item-artist">BARBEL</span>
+                </div>
+                <span class="item-duration">3:56</span>
+            </li>
+            <li class="queue-item">
+                <div class="item-info">
+                    <span class="item-title">Enamorame</span>
+                    <span class="item-dot">•</span>
+                    <span class="item-artist">El Kid, Rasta Lloyd</span>
+                </div>
+                <span class="item-duration">3:53</span>
+            </li>
+            <li class="queue-item">
+                <div class="item-info">
+                    <span class="item-title">Mi Despecho</span>
+                    <span class="item-dot">•</span>
+                    <span class="item-artist">Yemil</span>
+                </div>
+                <span class="item-duration">3:30</span>
+            </li>
+            <li class="queue-item">
+                <div class="item-info">
+                    <span class="item-title">Tu Chacal</span>
+                    <span class="item-dot">•</span>
+                    <span class="item-artist">SMILE BEATS, Valentino GRM</span>
+                </div>
+                <span class="item-duration">2:52</span>
+            </li>
+            <li class="queue-item">
+                <div class="item-info">
+                    <span class="item-title">Tu Man</span>
+                    <span class="item-dot">•</span>
+                    <span class="item-artist">Josuan, Valentino GRM</span>
+                </div>
+                <span class="item-duration">4:00</span>
+            </li>
+        </ul>
     </div>
+
+    <!-- Archivo de Audio MP3 -->
+    <audio id="audio" src="Na Na Na.mp3"></audio>
+
+    <script>
+        const audio = document.getElementById('audio');
+        const playBtn = document.getElementById('play-btn');
+        const playIcon = document.getElementById('play-icon');
+        const progressBar = document.getElementById('progress-bar');
+        const progressContainer = document.getElementById('progress-container');
+        const currentTimeEl = document.getElementById('current-time');
+        const durationEl = document.getElementById('duration');
+
+        // Play / Pause
+        playBtn.addEventListener('click', () => {
+            if (audio.paused) {
+                audio.play();
+                playIcon.classList.remove('fa-play');
+                playIcon.classList.add('fa-pause');
+                playIcon.style.marginLeft = "0px";
+            } else {
+                audio.pause();
+                playIcon.classList.remove('fa-pause');
+                playIcon.classList.add('fa-play');
+                playIcon.style.marginLeft = "3px";
+            }
+        });
+
+        // Actualizar barra de progreso y tiempo
+        audio.addEventListener('timeupdate', (e) => {
+            const { duration, currentTime } = e.srcElement;
+            if (duration) {
+                const progressPercent = (currentTime / duration) * 100;
+                progressBar.style.width = `${progressPercent}%`;
+                
+                // Formato de tiempo
+                const currentMinutes = Math.floor(currentTime / 60);
+                const currentSeconds = Math.floor(currentTime % 60);
+                currentTimeEl.innerText = `${currentMinutes}:${currentSeconds < 10 ? '0' : ''}${currentSeconds}`;
+            }
+        });
+
+        // Adelantar o atrasar al hacer clic en la barra
+        progressContainer.addEventListener('click', (e) => {
+            const width = progressContainer.clientWidth;
+            const clickX = e.offsetX;
+            const duration = audio.duration;
+            if (duration) {
+                audio.currentTime = (clickX / width) * duration;
+            }
+        });
+    </script>
 </body>
 </html>
