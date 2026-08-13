@@ -14,7 +14,8 @@
         }
 
         body {
-            background-color: #0b0b0e;
+            /* Azul oscuro elegante inspirado en los tonos del cielo de la portada */
+            background: linear-gradient(135deg, #0a0e1a 0%, #172036 50%, #0d1322 100%);
             color: #ffffff;
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
             min-height: 100vh;
@@ -30,8 +31,8 @@
             max-width: 290px;
             border-radius: 16px;
             padding: 15px;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.8);
-            border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.85);
+            border: 1px solid rgba(255, 255, 255, 0.1);
             z-index: 9999;
         }
 
@@ -88,7 +89,6 @@
             padding: 4px;
         }
 
-        /* Status log para saber si carga el audio */
         .status-msg {
             font-size: 10px;
             color: #ff6b6b;
@@ -338,8 +338,8 @@
         </ul>
     </div>
 
-    <!-- Carga con ruta relativa directa -->
-    <audio id="audio" src="./Na%20Na%20Na.mp3" preload="auto"></audio>
+    <!-- Etiqueta con autoplay habilitado -->
+    <audio id="audio" src="./Na%20Na%20Na.mp3" preload="auto" autoplay></audio>
 
     <script>
         const audio = document.getElementById('audio');
@@ -357,34 +357,56 @@
             return `${min}:${sec < 10 ? '0' : ''}${sec}`;
         }
 
+        function setPlayState() {
+            playIcon.classList.remove('fa-play');
+            playIcon.classList.add('fa-pause');
+            playIcon.style.marginLeft = "0px";
+            statusMsg.innerText = "";
+        }
+
+        function setPauseState() {
+            playIcon.classList.remove('fa-pause');
+            playIcon.classList.add('fa-play');
+            playIcon.style.marginLeft = "2px";
+        }
+
+        // Intento de reproducción automática al cargar la página
+        window.addEventListener('DOMContentLoaded', () => {
+            audio.play().then(() => {
+                setPlayState();
+            }).catch(() => {
+                // Si el navegador bloquea el autoplay con sonido, activa al primer clic del usuario
+                const startOnFirstInteraction = () => {
+                    audio.play().then(() => {
+                        setPlayState();
+                        document.removeEventListener('click', startOnFirstInteraction);
+                    });
+                };
+                document.addEventListener('click', startOnFirstInteraction);
+            });
+        });
+
         audio.addEventListener('loadedmetadata', () => {
             if (audio.duration) {
                 durationEl.innerText = formatTime(audio.duration);
-                statusMsg.innerText = "";
             }
         });
 
-        // Detector de errores de carga del MP3
         audio.addEventListener('error', () => {
             statusMsg.innerText = "Error: No se encuentra 'Na Na Na.mp3'";
         });
 
-        playBtn.addEventListener('click', () => {
+        playBtn.addEventListener('click', (e) => {
+            e.stopPropagation(); // Previene disparar otros eventos de clic
             if (audio.paused) {
                 audio.play().then(() => {
-                    playIcon.classList.remove('fa-play');
-                    playIcon.classList.add('fa-pause');
-                    playIcon.style.marginLeft = "0px";
-                    statusMsg.innerText = "";
+                    setPlayState();
                 }).catch(err => {
-                    statusMsg.innerText = "Haz clic de nuevo para reproducir";
-                    console.log("Error al reproducir:", err);
+                    statusMsg.innerText = "Toca para reproducir";
                 });
             } else {
                 audio.pause();
-                playIcon.classList.remove('fa-pause');
-                playIcon.classList.add('fa-play');
-                playIcon.style.marginLeft = "2px";
+                setPauseState();
             }
         });
 
@@ -405,9 +427,7 @@
         });
 
         audio.addEventListener('ended', () => {
-            playIcon.classList.remove('fa-pause');
-            playIcon.classList.add('fa-play');
-            playIcon.style.marginLeft = "2px";
+            setPauseState();
             progressBar.style.width = '0%';
             currentTimeEl.innerText = '0:00';
         });
