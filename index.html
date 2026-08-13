@@ -3,8 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Na Na Na - Anyuri</title>
+    <title>DEEPHYSTERIA</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Fuente de graffiti/arte urbano para DEEPHYSTERIA -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&family=Sedgwick+Ave+Display&display=swap" rel="stylesheet">
+
     <style>
         * {
             box-sizing: border-box;
@@ -14,20 +19,116 @@
         }
 
         body {
-            /* Fondo azul noche exacto */
-            background: linear-gradient(180deg, #121019 0%, #212236 50%, #0d0c12 100%);
+            /* Fondo azul noche/oscuro */
+            background: #171723;
             color: #ffffff;
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
             min-height: 100vh;
+            width: 100vw;
+            overflow-x: hidden;
             position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
 
-        /* Contenedor flotante con efecto cristal/oscuro que combina con el sitio */
+        /* --- IMÁGENES ROTADAS --- */
+        .screenshot {
+            position: absolute;
+            border-radius: 8px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+            object-fit: cover;
+            pointer-events: none;
+        }
+
+        /* Imagen 1 (abajo a la izquierda) */
+        .img-1 {
+            width: 260px;
+            bottom: 8%;
+            left: 5%;
+            transform: rotate(12deg);
+            z-index: 2;
+        }
+
+        /* Imagen 2 (arriba a la izquierda) */
+        .img-2 {
+            width: 250px;
+            top: 5%;
+            left: 5%;
+            transform: rotate(-10deg);
+            z-index: 2;
+        }
+
+        /* Imagen 3 (arriba a la derecha) */
+        .img-3 {
+            width: 240px;
+            top: 6%;
+            right: 22%;
+            transform: rotate(15deg);
+            z-index: 2;
+        }
+
+        /* --- CONTENIDO CENTRAL --- */
+        .main-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            z-index: 10;
+        }
+
+        .title-graffiti {
+            font-family: 'Sedgwick Ave Display', 'Permanent Marker', cursive;
+            font-size: 72px;
+            color: #c748de; /* Rosa / Violeta vibrante */
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            text-shadow: 3px 3px 0px #000, -2px -2px 0px #000, 2px -2px 0px #000, -2px 2px 0px #000;
+            margin-bottom: 15px;
+        }
+
+        .contacts-label {
+            font-size: 22px;
+            font-weight: 700;
+            color: #d8b4fe;
+            margin-bottom: 20px;
+            letter-spacing: 0.5px;
+        }
+
+        .social-buttons {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .social-icon-btn {
+            width: 80px;
+            height: 80px;
+            transition: transform 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .social-icon-btn img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.4));
+        }
+
+        .social-icon-btn:hover {
+            transform: scale(1.1);
+        }
+
+        /* --- SPOTIFY PLAYER CARD (Intacto) --- */
         .player-card {
             position: fixed;
             bottom: 20px;
             right: 20px;
-            background: rgba(15, 20, 32, 0.85); /* Azul/Negro semi-transparente */
+            background: rgba(15, 20, 32, 0.90) !important;
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
             width: 100%;
@@ -65,202 +166,63 @@
             margin-bottom: 10px;
         }
 
-        .track-info {
-            flex-grow: 1;
-        }
+        .track-info { flex-grow: 1; }
+        .track-title { font-size: 20px; font-weight: 800; color: #ffffff; margin-bottom: 2px; letter-spacing: -0.5px; }
+        .artist-name { font-size: 13px; color: rgba(255, 255, 255, 0.7); font-weight: 500; }
+        .add-btn { background: none; border: none; color: rgba(255, 255, 255, 0.8); font-size: 20px; cursor: pointer; padding: 4px; }
+        .status-msg { font-size: 10px; color: #ff6b6b; text-align: center; margin-bottom: 5px; min-height: 14px; }
 
-        .track-title {
-            font-size: 20px;
-            font-weight: 800;
-            color: #ffffff;
-            margin-bottom: 2px;
-            letter-spacing: -0.5px;
-        }
-
-        .artist-name {
-            font-size: 13px;
-            color: rgba(255, 255, 255, 0.7);
-            font-weight: 500;
-        }
-
-        .add-btn {
-            background: none;
-            border: none;
-            color: rgba(255, 255, 255, 0.8);
-            font-size: 20px;
-            cursor: pointer;
-            padding: 4px;
-            transition: color 0.2s;
-        }
-
-        .add-btn:hover {
-            color: #e84188; /* Rosa neón de la portada */
-        }
-
-        .status-msg {
-            font-size: 10px;
-            color: #ff6b6b;
-            text-align: center;
-            margin-bottom: 5px;
-            min-height: 14px;
-        }
-
-        /* Player Controls */
-        .controls-container {
-            margin-top: 5px;
-            margin-bottom: 15px;
-        }
-
-        .progress-bar-container {
-            width: 100%;
-            height: 4px;
-            background-color: rgba(255, 255, 255, 0.15);
-            border-radius: 2px;
-            margin-bottom: 6px;
-            position: relative;
-            cursor: pointer;
-        }
-
-        .progress-bar {
-            width: 0%;
-            height: 100%;
-            background-color: #e84188; /* Barra de progreso rosa neón */
-            border-radius: 2px;
-            transition: width 0.1s linear;
-        }
-
-        .time-stamps {
-            display: flex;
-            justify-content: space-between;
-            font-size: 10px;
-            color: rgba(255, 255, 255, 0.6);
-            font-weight: 600;
-            margin-bottom: 12px;
-        }
-
-        .playback-controls {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 18px;
-        }
-
-        .control-btn {
-            background: none;
-            border: none;
-            color: #ffffff;
-            font-size: 15px;
-            cursor: pointer;
-            opacity: 0.8;
-            transition: opacity 0.2s, color 0.2s;
-        }
-
-        .control-btn:hover {
-            opacity: 1;
-            color: #e84188;
-        }
-
+        .controls-container { margin-top: 5px; margin-bottom: 15px; }
+        .progress-bar-container { width: 100%; height: 4px; background-color: rgba(255, 255, 255, 0.15); border-radius: 2px; margin-bottom: 6px; position: relative; cursor: pointer; }
+        .progress-bar { width: 0%; height: 100%; background-color: #e84188; border-radius: 2px; transition: width 0.1s linear; }
+        .time-stamps { display: flex; justify-content: space-between; font-size: 10px; color: rgba(255, 255, 255, 0.6); font-weight: 600; margin-bottom: 12px; }
+        .playback-controls { display: flex; justify-content: center; align-items: center; gap: 18px; }
+        .control-btn { background: none; border: none; color: #ffffff; font-size: 15px; cursor: pointer; opacity: 0.8; }
+        
         .play-btn {
-            width: 42px;
-            height: 42px;
-            border-radius: 50%;
-            background-color: #e84188; /* Botón rosa neón para combinar con las letras */
-            color: #ffffff;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 16px;
-            cursor: pointer;
+            width: 42px; height: 42px; border-radius: 50%;
+            background-color: #e84188; color: #ffffff;
+            display: flex; justify-content: center; align-items: center;
+            font-size: 16px; cursor: pointer; border: none;
             box-shadow: 0 4px 12px rgba(232, 65, 136, 0.4);
-            border: none;
-            transition: transform 0.1s ease, background-color 0.2s;
         }
 
-        .play-btn:hover {
-            background-color: #ff4d97;
-        }
+        .queue-divider { display: flex; align-items: center; text-align: center; margin: 15px 0 10px 0; color: rgba(255, 255, 255, 0.5); font-size: 11px; font-weight: 600; }
+        .queue-divider::before, .queue-divider::after { content: ''; flex: 1; border-bottom: 1px solid rgba(255, 255, 255, 0.1); }
+        .queue-divider:not(:empty)::before { margin-right: .75em; }
+        .queue-divider:not(:empty)::after { margin-left: .75em; }
 
-        .play-btn:active {
-            transform: scale(0.95);
-        }
-
-        /* Queue Section */
-        .queue-divider {
-            display: flex;
-            align-items: center;
-            text-align: center;
-            margin: 15px 0 10px 0;
-            color: rgba(255, 255, 255, 0.5);
-            font-size: 11px;
-            font-weight: 600;
-            letter-spacing: 0.5px;
-        }
-
-        .queue-divider::before,
-        .queue-divider::after {
-            content: '';
-            flex: 1;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .queue-divider:not(:empty)::before {
-            margin-right: .75em;
-        }
-
-        .queue-divider:not(:empty)::after {
-            margin-left: .75em;
-        }
-
-        .queue-list {
-            list-style: none;
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
-
-        .queue-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-size: 12px;
-        }
-
-        .item-info {
-            display: flex;
-            align-items: center;
-            gap: 5px;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            max-width: 210px;
-        }
-
-        .item-title {
-            font-weight: 700;
-            color: #ffffff;
-        }
-
-        .item-dot {
-            color: rgba(255, 255, 255, 0.4);
-            font-weight: bold;
-        }
-
-        .item-artist {
-            color: rgba(255, 255, 255, 0.6);
-            font-weight: 500;
-            font-size: 11px;
-            text-transform: uppercase;
-        }
-
-        .item-duration {
-            color: rgba(255, 255, 255, 0.5);
-            font-size: 11px;
-            font-weight: 500;
-        }
+        .queue-list { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+        .queue-item { display: flex; justify-content: space-between; align-items: center; font-size: 12px; }
+        .item-info { display: flex; align-items: center; gap: 5px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 210px; }
+        .item-title { font-weight: 700; color: #ffffff; }
+        .item-dot { color: rgba(255, 255, 255, 0.4); font-weight: bold; }
+        .item-artist { color: rgba(255, 255, 255, 0.6); font-weight: 500; font-size: 11px; text-transform: uppercase; }
+        .item-duration { color: rgba(255, 255, 255, 0.5); font-size: 11px; font-weight: 500; }
     </style>
 </head>
 <body>
 
+    <!-- Imágenes de fondo vinculadas exactamente a tus archivos -->
+    <img src="yourdadnga.jpeg" alt="Screenshot 1" class="screenshot img-1">
+    <img src="tarded764.jpeg" alt="Screenshot 2" class="screenshot img-2">
+    <img src="Shitty4c.jpeg" alt="Screenshot 3" class="screenshot img-3">
+
+    <!-- Sección Central de Contactos -->
+    <div class="main-content">
+        <h1 class="title-graffiti">DEEPHYSTERIA</h1>
+        <p class="contacts-label">Click here for my contacts:</p>
+        <div class="social-buttons">
+            <a href="#" class="social-icon-btn" target="_blank">
+                <img src="tekegram.png" alt="Telegram">
+            </a>
+            <a href="#" class="social-icon-btn" target="_blank">
+                <img src="WhatsApp-Logo.wine.png" alt="WhatsApp">
+            </a>
+        </div>
+    </div>
+
+    <!-- Reproductor de Audio (Sin Modificar) -->
     <div class="player-card">
         <div class="album-art-container">
             <img class="album-art" src="Anyuri%20nanana.jpg" alt="">
