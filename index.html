@@ -21,7 +21,6 @@
             position: relative;
         }
 
-        /* Contenedor flotante compacto abajo a la derecha */
         .player-card {
             position: fixed;
             bottom: 20px;
@@ -89,9 +88,18 @@
             padding: 4px;
         }
 
+        /* Status log para saber si carga el audio */
+        .status-msg {
+            font-size: 10px;
+            color: #ff6b6b;
+            text-align: center;
+            margin-bottom: 5px;
+            min-height: 14px;
+        }
+
         /* Player Controls */
         .controls-container {
-            margin-top: 10px;
+            margin-top: 5px;
             margin-bottom: 15px;
         }
 
@@ -240,12 +248,10 @@
 <body>
 
     <div class="player-card">
-        <!-- Portada -->
         <div class="album-art-container">
             <img class="album-art" src="Anyuri%20nanana.jpg" alt="">
         </div>
 
-        <!-- Detalles de la canción -->
         <div class="track-header">
             <div class="track-info">
                 <div class="track-title">Na Na Na</div>
@@ -254,7 +260,8 @@
             <button class="add-btn"><i class="far fa-plus-square"></i></button>
         </div>
 
-        <!-- Controles del reproductor -->
+        <div class="status-msg" id="status-msg"></div>
+
         <div class="controls-container">
             <div class="progress-bar-container" id="progress-container">
                 <div class="progress-bar" id="progress-bar"></div>
@@ -268,7 +275,6 @@
                 <button class="control-btn"><i class="fas fa-random"></i></button>
                 <button class="control-btn"><i class="fas fa-step-backward"></i></button>
                 
-                <!-- Botón Play principal -->
                 <button class="play-btn" id="play-btn">
                     <i class="fas fa-play" id="play-icon" style="margin-left: 2px;"></i>
                 </button>
@@ -278,7 +284,6 @@
             </div>
         </div>
 
-        <!-- Lista de cola -->
         <div class="queue-divider">Queue</div>
 
         <ul class="queue-list">
@@ -333,8 +338,8 @@
         </ul>
     </div>
 
-    <!-- Elemento de audio con el nombre exacto del archivo subido a GitHub -->
-    <audio id="audio" src="Na%20Na%20Na.mp3" preload="metadata"></audio>
+    <!-- Carga con ruta relativa directa -->
+    <audio id="audio" src="./Na%20Na%20Na.mp3" preload="auto"></audio>
 
     <script>
         const audio = document.getElementById('audio');
@@ -344,28 +349,37 @@
         const progressContainer = document.getElementById('progress-container');
         const currentTimeEl = document.getElementById('current-time');
         const durationEl = document.getElementById('duration');
+        const statusMsg = document.getElementById('status-msg');
 
-        // Función para dar formato mm:ss
         function formatTime(seconds) {
             const min = Math.floor(seconds / 60);
             const sec = Math.floor(seconds % 60);
             return `${min}:${sec < 10 ? '0' : ''}${sec}`;
         }
 
-        // Cargar duración real cuando el audio esté listo
         audio.addEventListener('loadedmetadata', () => {
             if (audio.duration) {
                 durationEl.innerText = formatTime(audio.duration);
+                statusMsg.innerText = "";
             }
         });
 
-        // Alternar Play / Pause
+        // Detector de errores de carga del MP3
+        audio.addEventListener('error', () => {
+            statusMsg.innerText = "Error: No se encuentra 'Na Na Na.mp3'";
+        });
+
         playBtn.addEventListener('click', () => {
             if (audio.paused) {
-                audio.play();
-                playIcon.classList.remove('fa-play');
-                playIcon.classList.add('fa-pause');
-                playIcon.style.marginLeft = "0px";
+                audio.play().then(() => {
+                    playIcon.classList.remove('fa-play');
+                    playIcon.classList.add('fa-pause');
+                    playIcon.style.marginLeft = "0px";
+                    statusMsg.innerText = "";
+                }).catch(err => {
+                    statusMsg.innerText = "Haz clic de nuevo para reproducir";
+                    console.log("Error al reproducir:", err);
+                });
             } else {
                 audio.pause();
                 playIcon.classList.remove('fa-pause');
@@ -374,7 +388,6 @@
             }
         });
 
-        // Actualizar barra de progreso y tiempo en reproducción
         audio.addEventListener('timeupdate', () => {
             if (audio.duration) {
                 const progressPercent = (audio.currentTime / audio.duration) * 100;
@@ -383,7 +396,6 @@
             }
         });
 
-        // Permitir buscar/saltar tiempo al hacer clic en la barra
         progressContainer.addEventListener('click', (e) => {
             const width = progressContainer.clientWidth;
             const clickX = e.offsetX;
@@ -392,7 +404,6 @@
             }
         });
 
-        // Resetear icono cuando la canción termine
         audio.addEventListener('ended', () => {
             playIcon.classList.remove('fa-pause');
             playIcon.classList.add('fa-play');
