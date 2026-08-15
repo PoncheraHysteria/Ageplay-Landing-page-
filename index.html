@@ -3,12 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DEEPHYSTERIA</title>
+    <title>Na Na Na - Anyuri</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Fuente de graffiti/arte urbano para DEEPHYSTERIA -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&family=Sedgwick+Ave+Display&display=swap" rel="stylesheet">
 
     <style>
         * {
@@ -27,9 +23,6 @@
             width: 100vw;
             overflow-x: hidden;
             position: relative;
-            display: flex;
-            justify-content: center;
-            align-items: center;
         }
 
         /* --- IMÁGENES ROTADAS --- */
@@ -68,62 +61,7 @@
             z-index: 2;
         }
 
-        /* --- CONTENIDO CENTRAL --- */
-        .main-content {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            z-index: 10;
-        }
-
-        .title-graffiti {
-            font-family: 'Sedgwick Ave Display', 'Permanent Marker', cursive;
-            font-size: 72px;
-            color: #c748de; /* Rosa / Violeta vibrante */
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            text-shadow: 3px 3px 0px #000, -2px -2px 0px #000, 2px -2px 0px #000, -2px 2px 0px #000;
-            margin-bottom: 15px;
-        }
-
-        .contacts-label {
-            font-size: 22px;
-            font-weight: 700;
-            color: #d8b4fe;
-            margin-bottom: 20px;
-            letter-spacing: 0.5px;
-        }
-
-        .social-buttons {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 20px;
-        }
-
-        .social-icon-btn {
-            width: 80px;
-            height: 80px;
-            transition: transform 0.2s ease;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .social-icon-btn img {
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
-            filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.4));
-        }
-
-        .social-icon-btn:hover {
-            transform: scale(1.1);
-        }
-
-        /* --- SPOTIFY PLAYER CARD (Intacto) --- */
+        /* --- SPOTIFY PLAYER CARD --- */
         .player-card {
             position: fixed;
             bottom: 20px;
@@ -203,26 +141,12 @@
 </head>
 <body>
 
-    <!-- Imágenes de fondo vinculadas exactamente a tus archivos -->
+    <!-- Imágenes de fondo -->
     <img src="yourdadnga.jpeg" alt="Screenshot 1" class="screenshot img-1">
     <img src="tarded764.jpeg" alt="Screenshot 2" class="screenshot img-2">
     <img src="Shitty4c.jpeg" alt="Screenshot 3" class="screenshot img-3">
 
-    <!-- Sección Central de Contactos -->
-    <div class="main-content">
-        <h1 class="title-graffiti">DEEPHYSTERIA</h1>
-        <p class="contacts-label">Click here for my contacts:</p>
-        <div class="social-buttons">
-            <a href="#" class="social-icon-btn" target="_blank">
-                <img src="tekegram.png" alt="Telegram">
-            </a>
-            <a href="#" class="social-icon-btn" target="_blank">
-                <img src="WhatsApp-Logo.wine.png" alt="WhatsApp">
-            </a>
-        </div>
-    </div>
-
-    <!-- Reproductor de Audio (Sin Modificar) -->
+    <!-- Reproductor de Audio -->
     <div class="player-card">
         <div class="album-art-container">
             <img class="album-art" src="Anyuri%20nanana.jpg" alt="">
