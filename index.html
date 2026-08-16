@@ -5,6 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Na Na Na - Anyuri</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Fuentes para el banner -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,900;1,900&display=swap" rel="stylesheet">
 
     <style>
         * {
@@ -15,7 +19,6 @@
         }
 
         body {
-            /* Fondo azul noche/oscuro */
             background: #171723;
             color: #ffffff;
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
@@ -28,31 +31,106 @@
             align-items: center;
         }
 
-        /* --- ELEMENTO CENTRAL --- */
-        .center-container {
+        /* --- BANNER DE PRIME (HTML/CSS PURO) --- */
+        .prime-card {
+            width: 360px;
+            height: 360px;
+            background: linear-gradient(135deg, #60a5fa 0%, #a855f7 50%, #ec4899 100%);
+            border-radius: 16px;
+            padding: 20px;
             display: flex;
-            justify-content: center;
+            flex-direction: column;
             align-items: center;
-            z-index: 10;
-        }
-
-        .prime-gif {
-            max-width: 380px;
-            width: 100%;
-            height: auto;
-            border-radius: 12px;
-            cursor: pointer;
+            justify-content: space-between;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            z-index: 10;
+            font-family: 'Montserrat', sans-serif;
+            text-align: center;
         }
 
-        .prime-gif:hover {
-            transform: scale(1.03);
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.7);
+        /* Logo C en CSS */
+        .logo-c {
+            font-size: 90px;
+            font-weight: 900;
+            font-style: italic;
+            background: linear-gradient(180deg, #2563eb 0%, #e2e8f0 40%, #94a3b8 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            filter: drop-shadow(0px 4px 6px rgba(0, 0, 0, 0.3));
+            line-height: 1;
+            margin-top: 5px;
         }
 
-        .prime-gif:active {
-            transform: scale(0.98);
+        .prime-text-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .text-congratulations {
+            font-size: 20px;
+            font-weight: 900;
+            color: #ffffff;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .text-sub {
+            font-size: 14px;
+            font-weight: 900;
+            color: #ffffff;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .badge-prime {
+            background-color: rgba(30, 27, 75, 0.6);
+            border-radius: 20px;
+            padding: 4px 16px;
+            margin-top: 4px;
+            font-size: 14px;
+            font-weight: 900;
+            color: #ffffff;
+            letter-spacing: 1px;
+            display: inline-block;
+        }
+
+        .badge-prime span {
+            color: #eab308;
+        }
+
+        /* Botón Claim Now */
+        .claim-btn {
+            background-color: #fef08a;
+            border: 3px solid #3b82f6;
+            outline: 3px solid #f472b6;
+            border-radius: 30px;
+            padding: 10px 32px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 16px;
+            font-weight: 900;
+            color: #3b82f6;
+            cursor: pointer;
+            transition: transform 0.1s ease, box-shadow 0.1s ease;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            text-transform: uppercase;
+        }
+
+        .claim-btn span {
+            background: linear-gradient(90deg, #2563eb, #ec4899);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .claim-btn:hover {
+            transform: scale(1.05);
+        }
+
+        .claim-btn:active {
+            transform: scale(0.95);
         }
 
         /* --- SPOTIFY PLAYER CARD (A UN LADO) --- */
@@ -135,12 +213,23 @@
 </head>
 <body>
 
-    <!-- Imagen GIF Central -->
-    <div class="center-container">
-            <img src="FREE_PRIME.gif" alt="Free Prime" class="prime-gif" onclick="alert('NOPE, NIGGA!')">
+    <!-- Banner Central en HTML/CSS Puro -->
+    <div class="prime-card">
+        <div class="logo-c">C</div>
+        
+        <div class="prime-text-container">
+            <div class="text-congratulations">CONGRATULATIONS</div>
+            <div class="text-sub">YOU HAVE BEEN</div>
+            <div class="text-sub">AWARDED:</div>
+            <div class="badge-prime">1 MONTH <span>PRIME</span></div>
+        </div>
+
+        <button class="claim-btn" onclick="alert('Nope, Nigga!')">
+            <span>CLAIM NOW</span>
+        </button>
     </div>
 
-    <!-- Reproductor de Audio (a un lado) -->
+    <!-- Reproductor de Audio (A un lado) -->
     <div class="player-card">
         <div class="album-art-container">
             <img class="album-art" src="Anyuri%20nanana.jpg" alt="">
