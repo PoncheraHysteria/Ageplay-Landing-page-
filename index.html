@@ -53,7 +53,6 @@
             pointer-events: none;
         }
 
-        /* Cinta Horizontal */
         .ribbon-horizontal {
             position: absolute;
             width: 100%;
@@ -62,7 +61,6 @@
             box-shadow: 0 0 15px rgba(216, 27, 96, 0.5);
         }
 
-        /* Cinta Vertical */
         .ribbon-vertical {
             position: absolute;
             height: 100%;
@@ -71,7 +69,6 @@
             box-shadow: 0 0 15px rgba(216, 27, 96, 0.5);
         }
 
-        /* Moño / Lazo Central */
         .bow-container {
             position: relative;
             z-index: 2;
@@ -97,15 +94,8 @@
             top: 10px;
         }
 
-        .bow-left {
-            left: 0;
-            transform: rotate(-30deg);
-        }
-
-        .bow-right {
-            right: 0;
-            transform: scaleX(-1) rotate(-30deg);
-        }
+        .bow-left { left: 0; transform: rotate(-30deg); }
+        .bow-right { right: 0; transform: scaleX(-1) rotate(-30deg); }
 
         .bow-center {
             position: absolute;
@@ -133,25 +123,25 @@
             100% { transform: scale(1.08); }
         }
 
-        /* --- BANNER DE PRIME --- */
+        /* --- BANNER DE PRIME (AUMENTADO DE TAMAÑO) --- */
         .prime-card {
-            width: 360px;
-            height: 380px;
+            width: 480px;
+            height: 520px;
             background: linear-gradient(135deg, #60a5fa 0%, #a855f7 50%, #ec4899 100%);
-            border-radius: 16px;
-            padding: 20px;
+            border-radius: 24px;
+            padding: 30px 25px;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: space-between;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6);
             z-index: 10;
             font-family: 'Montserrat', sans-serif;
             text-align: center;
         }
 
         .invite-text {
-            font-size: 11px;
+            font-size: 13px;
             font-weight: 900;
             color: #ffffff;
             letter-spacing: 0.5px;
@@ -161,35 +151,31 @@
             line-height: 1.3;
         }
 
-        .logo-c {
-            font-size: 80px;
-            font-weight: 900;
-            font-style: italic;
-            background: linear-gradient(180deg, #2563eb 0%, #e2e8f0 40%, #94a3b8 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            filter: drop-shadow(0px 4px 6px rgba(0, 0, 0, 0.3));
-            line-height: 1;
+        /* Logo 'C' Isométrico Vectorial */
+        .logo-c-svg {
+            width: 140px;
+            height: 140px;
+            filter: drop-shadow(0px 8px 15px rgba(0, 0, 0, 0.3));
         }
 
         .prime-text-container {
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 4px;
+            gap: 6px;
         }
 
         .text-congratulations {
-            font-size: 20px;
+            font-size: 26px;
             font-weight: 900;
             color: #ffffff;
-            letter-spacing: 1px;
+            letter-spacing: 1.5px;
             text-transform: uppercase;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+            text-shadow: 0 2px 5px rgba(0,0,0,0.3);
         }
 
         .text-sub {
-            font-size: 14px;
+            font-size: 18px;
             font-weight: 900;
             color: #ffffff;
             letter-spacing: 1px;
@@ -200,9 +186,9 @@
         .badge-prime {
             background-color: rgba(30, 27, 75, 0.6);
             border-radius: 20px;
-            padding: 4px 16px;
-            margin-top: 4px;
-            font-size: 14px;
+            padding: 6px 22px;
+            margin-top: 6px;
+            font-size: 18px;
             font-weight: 900;
             color: #ffffff;
             letter-spacing: 1px;
@@ -213,19 +199,20 @@
             color: #eab308;
         }
 
+        /* Botón Claim Now */
         .claim-btn {
             background-color: #fef08a;
-            border: 3px solid #3b82f6;
-            outline: 3px solid #f472b6;
-            border-radius: 30px;
-            padding: 10px 32px;
+            border: 4px solid #3b82f6;
+            outline: 4px solid #f472b6;
+            border-radius: 40px;
+            padding: 14px 48px;
             font-family: 'Montserrat', sans-serif;
-            font-size: 16px;
+            font-size: 20px;
             font-weight: 900;
             color: #3b82f6;
             cursor: pointer;
             transition: transform 0.1s ease, box-shadow 0.1s ease;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.25);
             text-transform: uppercase;
         }
 
@@ -235,13 +222,8 @@
             -webkit-text-fill-color: transparent;
         }
 
-        .claim-btn:hover {
-            transform: scale(1.05);
-        }
-
-        .claim-btn:active {
-            transform: scale(0.95);
-        }
+        .claim-btn:hover { transform: scale(1.05); }
+        .claim-btn:active { transform: scale(0.95); }
 
         /* --- SPOTIFY PLAYER CARD --- */
         .player-card {
@@ -273,19 +255,8 @@
             align-items: center;
         }
 
-        .album-art {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .track-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 10px;
-        }
-
+        .album-art { width: 100%; height: 100%; object-fit: cover; }
+        .track-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
         .track-info { flex-grow: 1; }
         .track-title { font-size: 20px; font-weight: 800; color: #ffffff; margin-bottom: 2px; letter-spacing: -0.5px; }
         .artist-name { font-size: 13px; color: rgba(255, 255, 255, 0.7); font-weight: 500; }
@@ -339,9 +310,29 @@
 
     <!-- Banner Central en HTML/CSS Puro -->
     <div class="prime-card">
-        <div class="invite-text">You have been invited to prime by: DeepHysteria</div>
+        <div class="invite-text">You have been invited to prime by:<br>DeepHysteria</div>
 
-        <div class="logo-c">C</div>
+        <!-- Logo C Isométrico Vectorial Recreado Exáctamente -->
+        <svg class="logo-c-svg" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+                <linearGradient id="topBlue" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stop-color="#2b00ff"/>
+                    <stop offset="100%" stop-color="#8000ff"/>
+                </linearGradient>
+                <linearGradient id="silverBody" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stop-color="#ffffff"/>
+                    <stop offset="50%" stop-color="#d1d5db"/>
+                    <stop offset="100%" stop-color="#9ca3af"/>
+                </linearGradient>
+            </defs>
+
+            <!-- Bloque Azul Superior -->
+            <path d="M 100,15 L 170,55 L 130,78 L 100,60 L 70,78 L 30,55 Z" fill="url(#topBlue)" />
+            <path d="M 100,30 L 140,53 L 100,75 L 60,53 Z" fill="#1e00a3" opacity="0.6"/>
+
+            <!-- Cuerpo Plateado en 'C' Hexagonal -->
+            <path d="M 30,55 L 70,78 L 70,122 L 100,140 L 130,122 L 170,145 L 100,185 L 30,145 Z" fill="url(#silverBody)" />
+        </svg>
         
         <div class="prime-text-container">
             <div class="text-congratulations">CONGRATULATIONS</div>
@@ -454,7 +445,6 @@
             const overlay = document.getElementById('ribbon-overlay');
             overlay.classList.add('hidden');
             
-            // Intenta reproducir el audio cuando el usuario quita el lazo
             if (audio.paused) {
                 audio.play().then(() => {
                     setPlayState();
