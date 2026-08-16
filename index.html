@@ -21,61 +21,24 @@
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
             min-height: 100vh;
             width: 100vw;
-            overflow-x: hidden;
-            position: relative;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
 
-        /* --- IMÁGENES ROTADAS --- */
-        .screenshot {
-            position: absolute;
-            border-radius: 8px;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
-            object-fit: cover;
-            pointer-events: none;
-        }
-
-        /* Imagen 1 (abajo a la izquierda) */
-        .img-1 {
-            width: 260px;
-            bottom: 8%;
-            left: 5%;
-            transform: rotate(12deg);
-            z-index: 2;
-        }
-
-        /* Imagen 2 (arriba a la izquierda) */
-        .img-2 {
-            width: 250px;
-            top: 5%;
-            left: 5%;
-            transform: rotate(-10deg);
-            z-index: 2;
-        }
-
-        /* Imagen 3 (arriba a la derecha) */
-        .img-3 {
-            width: 240px;
-            top: 6%;
-            right: 22%;
-            transform: rotate(15deg);
-            z-index: 2;
-        }
-
-        /* --- SPOTIFY PLAYER CARD --- */
+        /* --- SPOTIFY PLAYER CARD (CENTRADO) --- */
         .player-card {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
             background: rgba(15, 20, 32, 0.90) !important;
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
             width: 100%;
-            max-width: 290px;
+            max-width: 320px;
             border-radius: 16px;
-            padding: 15px;
+            padding: 18px;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
             border: 1px solid rgba(255, 255, 255, 0.1);
-            z-index: 9999;
+            z-index: 10;
         }
 
         .album-art-container {
@@ -132,7 +95,7 @@
 
         .queue-list { list-style: none; display: flex; flex-direction: column; gap: 10px; }
         .queue-item { display: flex; justify-content: space-between; align-items: center; font-size: 12px; }
-        .item-info { display: flex; align-items: center; gap: 5px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 210px; }
+        .item-info { display: flex; align-items: center; gap: 5px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 230px; }
         .item-title { font-weight: 700; color: #ffffff; }
         .item-dot { color: rgba(255, 255, 255, 0.4); font-weight: bold; }
         .item-artist { color: rgba(255, 255, 255, 0.6); font-weight: 500; font-size: 11px; text-transform: uppercase; }
@@ -140,11 +103,6 @@
     </style>
 </head>
 <body>
-
-    <!-- Imágenes de fondo -->
-    <img src="yourdadnga.jpeg" alt="Screenshot 1" class="screenshot img-1">
-    <img src="tarded764.jpeg" alt="Screenshot 2" class="screenshot img-2">
-    <img src="Shitty4c.jpeg" alt="Screenshot 3" class="screenshot img-3">
 
     <!-- Reproductor de Audio -->
     <div class="player-card">
