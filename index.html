@@ -21,24 +21,55 @@
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
             min-height: 100vh;
             width: 100vw;
-            overflow: hidden;
+            overflow-x: hidden;
+            position: relative;
             display: flex;
             justify-content: center;
             align-items: center;
         }
 
-        /* --- SPOTIFY PLAYER CARD (CENTRADO) --- */
+        /* --- ELEMENTO CENTRAL --- */
+        .center-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 10;
+        }
+
+        .prime-gif {
+            max-width: 380px;
+            width: 100%;
+            height: auto;
+            border-radius: 12px;
+            cursor: pointer;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .prime-gif:hover {
+            transform: scale(1.03);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.7);
+        }
+
+        .prime-gif:active {
+            transform: scale(0.98);
+        }
+
+        /* --- SPOTIFY PLAYER CARD (A UN LADO) --- */
         .player-card {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
             background: rgba(15, 20, 32, 0.90) !important;
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
             width: 100%;
-            max-width: 320px;
+            max-width: 290px;
             border-radius: 16px;
-            padding: 18px;
+            padding: 15px;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
             border: 1px solid rgba(255, 255, 255, 0.1);
-            z-index: 10;
+            z-index: 9999;
         }
 
         .album-art-container {
@@ -95,7 +126,7 @@
 
         .queue-list { list-style: none; display: flex; flex-direction: column; gap: 10px; }
         .queue-item { display: flex; justify-content: space-between; align-items: center; font-size: 12px; }
-        .item-info { display: flex; align-items: center; gap: 5px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 230px; }
+        .item-info { display: flex; align-items: center; gap: 5px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 210px; }
         .item-title { font-weight: 700; color: #ffffff; }
         .item-dot { color: rgba(255, 255, 255, 0.4); font-weight: bold; }
         .item-artist { color: rgba(255, 255, 255, 0.6); font-weight: 500; font-size: 11px; text-transform: uppercase; }
@@ -104,7 +135,12 @@
 </head>
 <body>
 
-    <!-- Reproductor de Audio -->
+    <!-- Imagen GIF Central -->
+    <div class="center-container">
+            <img src="FREE_PRIME.gif" alt="Free Prime" class="prime-gif" onclick="alert('NOPE, NIGGA!')">
+    </div>
+
+    <!-- Reproductor de Audio (a un lado) -->
     <div class="player-card">
         <div class="album-art-container">
             <img class="album-art" src="Anyuri%20nanana.jpg" alt="">
